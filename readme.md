@@ -3,13 +3,15 @@ esp8266-uhttpd
 
 **Instructions in English is followed by Chinese.**
 
+
+
 该项目编译环境为 [freertos SDK](https://github.com/espressif/esp_iot_rtos_sdk), 请将代码放在 `app/user/` 目录下  
 本项目修改于 httpd, 去掉了它的 webfs, 由于在修改的时候也没搞清楚 httpd 的各种参数, 所以代码比较乱, 随时更新.  
 串口输出比较乱，是因为这坑爹的东西不提供动态调试，在没有弄稳定前，这些输出暂时保留。  
 请 **慎重** 将其直接用于工程, 因为这是不稳定的版本。水平太次见笑了。
 
 Compiling enviroment: [freertos SDK](https://github.com/espressif/esp_iot_rtos_sdk), pls put all files into `app/user/`  
-This project is originated from *httpd*, removed webfs. It is a alpha version, not stable enough. Sorry for the uart output, since debug is so hard that I can not get to know the procedure of httpd.  
+This project is originated from *httpd*, but a little different from *httpd*, it removes webfs, CGI in httpd and other things which I can not figure out what the damn meanning. It is a alpha version, not stable enough. Sorry for the uart output, since debug is so hard that I can not get to know the procedure of httpd.  
 **ATTENTION: DO NOT USE IT IN YOUR BUSINESS PROJ DIRECTLY, IT IS NOT STABLE**
 
 ### 使用方法
