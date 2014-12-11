@@ -1,6 +1,8 @@
 esp8266-uhttpd
 =================
 
+**Instructions in English is followed by Chinese.**
+
 该项目编译环境为 [freertos SDK](https://github.com/espressif/esp_iot_rtos_sdk), 请将代码放在 `app/user/` 目录下  
 本项目修改于 httpd, 去掉了它的 webfs, 由于在修改的时候也没搞清楚 httpd 的各种参数, 所以代码比较乱, 随时更新.  
 串口输出比较乱，是因为这坑爹的东西不提供动态调试，在没有弄稳定前，这些输出暂时保留。  
