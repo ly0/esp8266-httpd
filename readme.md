@@ -7,6 +7,9 @@ esp8266-uhttpd
 
 请 **慎重** 将其直接用于工程, 因为这是不稳定的版本。水平太次见笑了。
 
+This project is originated from *httpd*, removed webfs. It is a alpha version, not stable enough. Sorry for the uart output, since debug is so hard that I can not get to know the procedure of httpd.
+
+**ATTENTION: DO NOT USE IT IN YOUR BUSINESS PROJ DIRECTLY, IT IS NOT STABLE**
 
 ### 使用方法
 1. 建立一个新文件 `page_xxxx.c` ，内容模板和介绍如下，有些地方可以适当修改
@@ -75,3 +78,81 @@ URLRouter router_urls[] = {
 extern const char* page_xxx(HTTPRequest *, void*);
 ```
 至于为什么要有第二个参数，是因为方便以后可能传参进去。
+
+
+
+### INSTRUCTION
+1. create a new file `page_xxxx.c` , template is as following
+```c
+#include "esp_common.h"
+#include "api_struct.h"
+
+const char* ICACHE_FLASH_ATTR
+page_index(HTTPRequest *req, void *args)
+{
+    char *api_buffer = (char *)malloc(MAX_API_CONTENT);
+    uint32_t para_amount;
+    /* 
+        Better do not change next statement,
+        or you edit extract_params yourself
+    */
+    Params para[MAX_PARAM];
+
+    /* POST OR GET */
+    if(0 == req->is_post)
+    {
+        /* GET for getting data */
+        /* This area is for GET method */
+        char method[] = "GET";
+        char *params = req->params;
+        /* 
+            using extract_params for paring parameters string
+            parameters will be seperated in array para
+            para_amount is the number of parameters which has already been parsed
+            the maximum of parameter was define by MAX_PARAM in api_struct.h  
+            E.g.
+            URI: /?para1=555&para2=666, in the para
+
+            para[0] [char *key="para1", char *value="555"]
+            para[1] [char *key="para2", char *value="666"]
+        */
+        para_amount = extract_params(params, para);
+        
+    } else {
+        /* POST for changing data */
+        /* This area is for POST method */
+        char method[] = "POST";
+        /* It is the same way to parse parameters likes GET*/
+        char *params = req->params;
+        para_amount = extract_params(params, para);
+
+        /* POST payload: req->post_data*/
+        /*
+            if the types of payload are simple key-value data,
+            you also can use extract_params to parse them
+        */
+        para_amount = extract_params(req->post_data, para);
+    }
+    
+    /*
+        you should manipulate all output in api_buffer,
+        free() will be invoked after the data was sent to client
+    */
+    return api_buffer;
+}
+```
+
+2. Edit api.h
+```c
+URLRouter router_urls[] = {
+    {"/", page_index},
+    {"/ssid", page_ssid},
+    {"/xxxx", page_xxxx} //Your new URI
+
+};
+```
+add following before `#endif`
+```c
+extern const char* page_xxx(HTTPRequest *, void*);
+```
+as for why there is a *second parameter*, ahh.. this parameter is just kept for the future use.
