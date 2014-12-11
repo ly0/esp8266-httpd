@@ -1,4 +1,4 @@
-esp8266-uhttpd
+esp8266-httpd
 =================
 
 **Instructions in English is followed by Chinese.**
@@ -6,12 +6,12 @@ esp8266-uhttpd
 
 
 该项目编译环境为 [freertos SDK](https://github.com/espressif/esp_iot_rtos_sdk), 请将代码放在 `app/user/` 目录下  
-本项目修改于 httpd, 去掉了它的 webfs, 由于在修改的时候也没搞清楚 httpd 的各种参数, 所以代码比较乱, 随时更新.  
+本项目修改于 httpd, 去掉了它的 webfs, 和 httpd 区别比较大，主要区别是我去掉了我不知道干什么的东西（虽然没去完）以及让开发接口更方便，由于在修改的时候也没搞清楚 httpd 的各种参数, 所以代码比较乱, 随时更新.  
 串口输出比较乱，是因为这坑爹的东西不提供动态调试，在没有弄稳定前，这些输出暂时保留。  
 请 **慎重** 将其直接用于工程, 因为这是不稳定的版本。水平太次见笑了。
 
 Compiling enviroment: [freertos SDK](https://github.com/espressif/esp_iot_rtos_sdk), pls put all files into `app/user/`  
-This project is originated from *httpd*, but a little different from *httpd*, it removes webfs, CGI in httpd and other things which I can not figure out what the damn meanning. It is a alpha version, not stable enough. Sorry for the uart output, since debug is so hard that I can not get to know the procedure of httpd.  
+This project is originated from *httpd*, but a little different from *httpd*, it removes webfs, CGI in httpd and other things which I can not figure out what the damn meanning. Since webfs is removed, I use `api.h` `page_xxx.c` to configure interface. It is a alpha version, not stable enough. Sorry for the uart output, since debug is so hard that I can not get to know the procedure of httpd.  
 **ATTENTION: DO NOT USE IT IN YOUR BUSINESS PROJ DIRECTLY, IT IS NOT STABLE**
 
 ### 使用方法
@@ -159,3 +159,13 @@ add following before `#endif`
 extern const char* page_xxx(HTTPRequest *, void*);
 ```
 as for why there is a *second parameter*, ahh.. this parameter is just kept for the future use.
+
+### 演示
+
+* `GET`: 编译以后, 浏览器访问 `http://192.168.4.1/` 和 `http://192.168.4.1/ssid`
+* `POST`: 编译以后, 使用 `curl` 或者其他可以 `POST` 的工具，如 `curl` 在命令行下 `curl http://192.168.4.1/ssid?para1=A&para2=BBB --data "postpara1=a1b2&postpara2=a2b2"`
+
+### Demo
+
+* `GET`: After compiling, visit `http://192.168.4.1/` and `http://192.168.4.1/ssid`
+* `POST`: After compiling, using `curl` or other tools that can `POST`，e.g. `curl` in CLI: `curl http://192.168.4.1/ssid?para1=A&para2=BBB --data "postpara1=a1b2&postpara2=a2b2"`
