@@ -169,3 +169,11 @@ as for why there is a *second parameter*, ahh.. this parameter is just kept for 
 
 * `GET`: After compiling, visit `http://192.168.4.1/` and `http://192.168.4.1/ssid`
 * `POST`: After compiling, using `curl` or other tools that can `POST`，e.g. `curl` in CLI: `curl http://192.168.4.1/ssid?para1=A&para2=BBB --data "postpara1=a1b2&postpara2=a2b2"`
+
+### TODOLIST
+* 参考 *esphttpd* 加入一个使用 *heatshrink* 压缩的文件系统(暂定)
+* 进一步精简原 *httpd* 的代码
+
+### TODOLIST
+* add *heatshrink* filesystem, refered by *esphttpd* (tentative)
+* simplify *httpd*'s original codes.
