@@ -173,7 +173,9 @@ as for why there is a *second parameter*, ahh.. this parameter is just kept for 
 ### TODOLIST
 * 参考 *esphttpd* 加入一个使用 *heatshrink* 压缩的文件系统(暂定)
 * 进一步精简原 *httpd* 的代码
+* 加入正则引擎 (考虑使用 *slre* )
 
 ### TODOLIST
 * add *heatshrink* filesystem, refered by *esphttpd* (tentative)
 * simplify *httpd*'s original codes.
+* add a regular expression engine (considering *slre*)
