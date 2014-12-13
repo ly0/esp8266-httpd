@@ -179,3 +179,6 @@ as for why there is a *second parameter*, ahh.. this parameter is just kept for 
 * add *heatshrink* filesystem, refered by *esphttpd* (tentative)
 * simplify *httpd*'s original codes.
 * add a regular expression engine (considering *slre*)
+
+### Notes (only in chinese)
+* 考虑重写cgi handler, 之前只考虑到文本数据，所以采用了 strlen 函数，这个似乎不合适
